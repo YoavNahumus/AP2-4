@@ -9,11 +9,11 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#075f36"
+        android:background="@drawable/title_background"
         android:orientation="horizontal"
         android:text="Register"
         android:textAlignment="center"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="33sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -176,7 +176,6 @@
             android:layout_marginStart="30dp"
             android:layout_marginTop="50dp"
             android:layout_marginEnd="30dp"
-            android:background="@drawable/submit_btn"
             android:text="Submit"
             android:textSize="20sp"
             app:cornerRadius="10dp" />
