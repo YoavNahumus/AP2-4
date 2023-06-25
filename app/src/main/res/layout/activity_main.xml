@@ -100,6 +100,17 @@
             android:text="Submit"
             android:textSize="20sp"
             app:cornerRadius="10dp" />
+
+        <Button
+            android:id="@id/register_btn_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="30dp"
+            android:text="Register New Account"
+            android:textSize="20sp"
+            app:cornerRadius="10dp" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

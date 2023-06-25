@@ -6,13 +6,18 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -20,6 +25,19 @@ public class RegisterActivity extends AppCompatActivity {
 
     String profilePic;
 
+    private String encodeImage(Bitmap bm)
+    {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.JPEG,100,baos);
+        byte[] b = baos.toByteArray();
+
+        String encImage = Base64.encodeToString(b, Base64.DEFAULT);
+
+        //data:[<media type>][;charset=<character set>][;base64],<data>
+        String formatedImage = "data:image/jpeg;base64,"+encImage;
+
+        return formatedImage;
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,10 +47,18 @@ public class RegisterActivity extends AppCompatActivity {
 
         ActivityResultLauncher<PickVisualMediaRequest> pickMedia =
                 registerForActivityResult(new ActivityResultContracts.PickVisualMedia(), uri -> {
-                    // Callback is invoked after the user selects a media item or closes the
-                    // photo picker.
+
+                    try {
+                        final InputStream imageStream = getContentResolver().openInputStream(uri);
+
+                        final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                        profilePic = encodeImage(selectedImage);
+                        Log.d("try bitch","Bitmap Encoded?!");
+                    } catch (Exception e){
+                        e.printStackTrace();
+                    }
                     if (uri != null) {
-                        Log.d("PhotoPicker", "Selected URI: " + uri);
+                        Log.d("PhotoPicker", "Selected URI: " + uri +"\ndata\n" + profilePic );
                     } else {
                         Log.d("PhotoPicker", "No media selected");
                     }
