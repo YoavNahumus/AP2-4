@@ -3,54 +3,47 @@ package com.example.ap2_4;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
+import com.example.ap2_4.api.API;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
+    public static final API api = new API();
+    private static final String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFzIiwiaWF0IjoxNjg3Njg2MDE2fQ.BdEwB-SqhVR2UkTO2Zpagw4BeA-36OrGKwI9jmy0kPg";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        findViewById(R.id.submit).setOnClickListener(v -> {
-            ExecutorService executor = Executors.newFixedThreadPool(1);
-            Future<?> result = executor.submit(this::login);
-            try {
-                result.get(10, TimeUnit.SECONDS);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
+        findViewById(R.id.submit).setOnClickListener(this::login);
     }
 
-    private void login() {
+    private void login(View v) {
+        api.login(
+                ((EditText) findViewById(R.id.usernameInput)).getText().toString(),
+                ((EditText) findViewById(R.id.passwordInput)).getText().toString(),
+                new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        if (!response.isSuccessful()) {
+                            Toast.makeText(MainActivity.this, "Failed to login", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        String token = response.body();
+                        // TODO: save token and redirect to chats activity
+                    }
 
-        try {
-            URL url = new URL("http://10.0.2.2:5000/Tokens");
-            String username = ((EditText)findViewById(R.id.usernameInput)).getText().toString();
-            String password = ((EditText)findViewById(R.id.passwordInput)).getText().toString();
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/json; utf-8");
-            conn.setRequestProperty("Accept", "application/json");
-            conn.setDoOutput(true);
-            String jsonInputString = "{\"username\": \"" + username + "\", \"password\": \"" + password + "\"}";
-            conn.getOutputStream().write(jsonInputString.getBytes());
-            String response = conn.getResponseMessage();
-            if (conn.getResponseCode() == 200) {
-                System.out.println(response);
-            } else {
-                System.out.println(response);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+                        Toast.makeText(MainActivity.this, "Failed to login", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 }
