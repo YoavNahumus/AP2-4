@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
@@ -24,6 +25,7 @@ import java.net.URL;
 public class RegisterActivity extends AppCompatActivity {
 
     String profilePic;
+    ImageView imageInput;
 
     private String encodeImage(Bitmap bm)
     {
@@ -52,6 +54,7 @@ public class RegisterActivity extends AppCompatActivity {
                         final InputStream imageStream = getContentResolver().openInputStream(uri);
 
                         final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                        imageInput.setImageBitmap(selectedImage);
                         profilePic = encodeImage(selectedImage);
                         Log.d("try bitch","Bitmap Encoded?!");
                     } catch (Exception e){
@@ -63,8 +66,8 @@ public class RegisterActivity extends AppCompatActivity {
                         Log.d("PhotoPicker", "No media selected");
                     }
                 });
-        Button clickButton = (Button) findViewById(R.id.image_button_id);
-        clickButton.setOnClickListener( new View.OnClickListener() {
+        imageInput = (ImageView) findViewById(R.id.image_input_id);
+        imageInput.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 pickMedia.launch(new PickVisualMediaRequest.Builder()
@@ -72,6 +75,7 @@ public class RegisterActivity extends AppCompatActivity {
                         .build());
             }
         });
+
     }
 
     private void register(View v) {
