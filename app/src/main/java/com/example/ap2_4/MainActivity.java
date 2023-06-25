@@ -14,9 +14,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
-    public static final API api = new API();
-    private static final String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFzIiwiaWF0IjoxNjg3Njg2MDE2fQ.BdEwB-SqhVR2UkTO2Zpagw4BeA-36OrGKwI9jmy0kPg";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void login(View v) {
-        api.login(
+        API.instance.login(
                 ((EditText) findViewById(R.id.usernameInput)).getText().toString(),
                 ((EditText) findViewById(R.id.passwordInput)).getText().toString(),
                 new Callback<String>() {
