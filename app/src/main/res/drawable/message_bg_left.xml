@@ -7,5 +7,5 @@
         android:bottom="2dp" />
     <corners android:topLeftRadius="20dp" android:topRightRadius="20dp"
         android:bottomLeftRadius="0dp" android:bottomRightRadius="20dp"/>
-    <solid android:color="@color/msgsent" />
+    <solid android:color="@color/msgrecive" />
 </shape>
