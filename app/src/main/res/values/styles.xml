@@ -5,4 +5,8 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
     </style>
+
+    <style name="Widget.Theme.AP24.MyView" parent="">
+        <item name="android:background">@color/gray_400</item>
+    </style>
 </resources>

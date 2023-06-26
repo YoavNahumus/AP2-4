@@ -2,6 +2,7 @@ package com.example.ap2_4;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -20,6 +21,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         findViewById(R.id.submit).setOnClickListener(this::login);
+
+        Intent i = new Intent(this, ChatActivity.class);
+        startActivity(i);
     }
 
     private void login(View v) {
