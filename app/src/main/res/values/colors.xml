@@ -3,6 +3,8 @@
     <color name="black">#FF000000</color>
     <color name="graybg">#212121</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="background_dark_green">#FF075f36</color>
+
     <color name="white2">#D3D3D3</color>
     <color name="greentop">#4D9052</color>
     <color name="msgsent">#256A2A</color>

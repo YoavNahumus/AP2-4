@@ -9,11 +9,11 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#075f36"
+        android:background="@drawable/title_background"
         android:orientation="horizontal"
         android:text="Register"
         android:textAlignment="center"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="33sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -168,9 +168,21 @@
                 android:textColor="@color/white"
                 android:textSize="20sp" />
 
+            <ImageView
+                android:id="@+id/image_input_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:maxHeight="100dp"
+                android:maxWidth="100dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/baseline_add_a_photo_24"
+                app:cornerRadius="10dp" />
+
         </LinearLayout>
 
         <Button
+            android:id="@+id/submit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
@@ -179,6 +191,9 @@
             android:text="Submit"
             android:textSize="20sp"
             app:cornerRadius="10dp" />
+
     </LinearLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

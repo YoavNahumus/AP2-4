@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -20,10 +22,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         findViewById(R.id.submit).setOnClickListener(this::login);
 
-        Intent i = new Intent(this, ChatActivity.class);
-        startActivity(i);
     }
 
     private void login(View v) {
