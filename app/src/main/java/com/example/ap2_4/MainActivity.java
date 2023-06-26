@@ -38,7 +38,9 @@ public class MainActivity extends AppCompatActivity {
                             return;
                         }
                         String token = response.body();
-                        // TODO: save token and redirect to chats activity
+                        Intent intent = new Intent(MainActivity.this, ChatsActivity.class);
+                        intent.putExtra("token", token);
+                        startActivity(intent);
                     }
 
                     @Override
