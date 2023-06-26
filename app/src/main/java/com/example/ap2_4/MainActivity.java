@@ -21,6 +21,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         findViewById(R.id.submit).setOnClickListener(this::login);
+
+        Intent i = new Intent(this, ChatActivity.class);
+        startActivity(i);
     }
 
     private void login(View v) {

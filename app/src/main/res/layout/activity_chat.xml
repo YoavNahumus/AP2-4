@@ -51,10 +51,12 @@
             android:layout_weight="1">
 
             <LinearLayout
-                android:id="@+id/container"
+                android:id="@+id/message_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
+
 
                 <TextView
                     android:layout_width="200dp"
