@@ -7,18 +7,18 @@
     android:background="@color/graybg">
 
     <TextView
+        android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#075f36"
+        android:background="@drawable/title_background"
         android:orientation="horizontal"
         android:text="Login"
         android:textAlignment="center"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="33sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/title"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -91,6 +91,7 @@
         </LinearLayout>
 
         <Button
+            android:id="@id/login_btn_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
@@ -98,8 +99,19 @@
             android:layout_marginEnd="30dp"
             android:text="Submit"
             android:textSize="20sp"
-            app:cornerRadius="10dp"
-            android:id="@+id/submit"/>
+            app:cornerRadius="10dp" />
+
+        <Button
+            android:id="@id/register_btn_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="30dp"
+            android:text="Register New Account"
+            android:textSize="20sp"
+            app:cornerRadius="10dp" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
