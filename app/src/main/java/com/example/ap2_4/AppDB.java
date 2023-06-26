@@ -5,11 +5,13 @@ import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
 import com.example.ap2_4.entities.ChatEntity;
+import com.example.ap2_4.entities.MessageEntity;
 
-@Database(entities = {ChatEntity.class}, version = 1)
+@Database(entities = {ChatEntity.class, MessageEntity.class}, version = 1)
 @TypeConverters({Converters.class})
 public abstract class AppDB extends RoomDatabase {
     public abstract ChatDao chatDao();
+    public abstract MessageDao messageDao();
 
     private static AppDB instance;
 

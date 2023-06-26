@@ -7,6 +7,8 @@ import android.util.Base64;
 import androidx.room.TypeConverter;
 
 import java.io.ByteArrayOutputStream;
+import java.text.DateFormat;
+import java.util.Date;
 
 public class Converters {
     @TypeConverter
@@ -15,7 +17,7 @@ public class Converters {
             return null;
         }
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 10, outputStream);
         return Base64.encodeToString(outputStream.toByteArray(), Base64.DEFAULT);
     }
 
@@ -31,5 +33,25 @@ public class Converters {
         byte[] bytes = Base64.decode(encoded, Base64.DEFAULT);
         Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
         return Bitmap.createBitmap(bitmap);
+    }
+
+    @TypeConverter
+    public static String fromDate(Date date) {
+        if (date == null) {
+            return null;
+        }
+        return date.toString();
+    }
+
+    @TypeConverter
+    public static Date toDate(String date) {
+        if (date == null) {
+            return null;
+        }
+        try {
+            return DateFormat.getDateTimeInstance().parse(date);
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

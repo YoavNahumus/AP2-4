@@ -21,15 +21,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         findViewById(R.id.submit).setOnClickListener(this::login);
-
-        Intent i = new Intent(this, ChatActivity.class);
-        startActivity(i);
     }
 
     private void login(View v) {
+        String username = ((EditText) findViewById(R.id.usernameInput)).getText().toString();
+        String password = ((EditText) findViewById(R.id.passwordInput)).getText().toString();
         API.instance.login(
-                ((EditText) findViewById(R.id.usernameInput)).getText().toString(),
-                ((EditText) findViewById(R.id.passwordInput)).getText().toString(),
+                username, password,
                 new Callback<String>() {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
@@ -40,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
                         String token = response.body();
                         Intent intent = new Intent(MainActivity.this, ChatsActivity.class);
                         intent.putExtra("token", token);
+                        intent.putExtra("username", username);
                         startActivity(intent);
                     }
 
