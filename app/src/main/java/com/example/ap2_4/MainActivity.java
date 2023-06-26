@@ -2,6 +2,7 @@ package com.example.ap2_4;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -34,7 +35,9 @@ public class MainActivity extends AppCompatActivity {
                             return;
                         }
                         String token = response.body();
-                        // TODO: save token and redirect to chats activity
+                        Intent intent = new Intent(MainActivity.this, ChatsActivity.class);
+                        intent.putExtra("token", token);
+                        startActivity(intent);
                     }
 
                     @Override
