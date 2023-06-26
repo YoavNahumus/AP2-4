@@ -43,10 +43,6 @@ public class ChatsListAdapter extends RecyclerView.Adapter<ChatsListAdapter.Chat
     public ChatsListAdapter(Context context, Consumer<ChatEntity> onChatClick) {
         this.inflater = LayoutInflater.from(context);
         this.onChatClick = onChatClick;
-    private List<ChatEntity> chats;
-
-    public ChatsListAdapter(Context context) {
-        this.inflater = LayoutInflater.from(context);
     }
 
     @NonNull

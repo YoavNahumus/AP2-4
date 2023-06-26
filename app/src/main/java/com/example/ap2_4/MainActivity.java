@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        findViewById(R.id.submit).setOnClickListener(this::login);
+        findViewById(R.id.login_btn_id).setOnClickListener(this::login);
     }
 
     private void login(View v) {
