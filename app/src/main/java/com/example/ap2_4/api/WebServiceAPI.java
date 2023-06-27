@@ -2,6 +2,7 @@ package com.example.ap2_4.api;
 
 import com.example.ap2_4.entities.Chat;
 import com.example.ap2_4.entities.ChatDescription;
+import com.example.ap2_4.entities.FireToken;
 import com.example.ap2_4.entities.Message;
 import com.example.ap2_4.entities.MessageContent;
 import com.example.ap2_4.entities.SimplifiedChat;
@@ -18,6 +19,9 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface WebServiceAPI {
+    @POST("Firebase")
+    Call<String> firetoken(@Body FireToken token, @Header("authorization") String authorization);
+
     @POST("Tokens")
     Call<String> login(@Body User user);
 

@@ -2,6 +2,7 @@ package com.example.ap2_4.api;
 
 import com.example.ap2_4.entities.Chat;
 import com.example.ap2_4.entities.ChatDescription;
+import com.example.ap2_4.entities.FireToken;
 import com.example.ap2_4.entities.Message;
 import com.example.ap2_4.entities.MessageContent;
 import com.example.ap2_4.entities.SimplifiedChat;
@@ -15,20 +16,33 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class API {
-    public static final API instance = new API();
+    private static API instance = new API("http://10.0.2.2:5000/api/");
     Retrofit retrofit;
     WebServiceAPI webServiceAPI;
 
-    private API() {
+    private API(String url) {
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:5000/api/")
+                .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         webServiceAPI = retrofit.create(WebServiceAPI.class);
     }
 
+    public static API getInstance() {
+        return instance;
+    }
+
+    public static void changeURL(String url) {
+        instance = new API(url);
+    }
+
     public void login(String username, String password, Callback<String> callback) {
         Call<String> call = webServiceAPI.login(new User(username, "", "", password));
+        call.enqueue(callback);
+    }
+
+    public void updateFireToken(String fireToken, String Token, Callback<String> callback) {
+        Call<String> call = webServiceAPI.firetoken(new FireToken(fireToken), "Bearer " + Token);
         call.enqueue(callback);
     }
 

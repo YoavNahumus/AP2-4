@@ -30,7 +30,7 @@ public class AddChatActivity extends AppCompatActivity {
 
         btnAdd.setOnClickListener(v -> {
             String username = ((EditText) findViewById(R.id.usernameInput)).getText().toString();
-              API.instance.createChat(username, getIntent().getStringExtra("token"), new Callback<ChatDescription>() {
+              API.getInstance().createChat(username, getIntent().getStringExtra("token"), new Callback<ChatDescription>() {
                   @Override
                   public void onResponse(Call<ChatDescription> call, Response<ChatDescription> response) {
                         if (!response.isSuccessful()) {

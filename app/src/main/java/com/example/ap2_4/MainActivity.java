@@ -22,7 +22,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        findViewById(R.id.register_btn_id).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this,RegisterActivity.class);
+                startActivity(i);
+            }
+        });
         findViewById(R.id.login_btn_id).setOnClickListener(this::login);
         findViewById(R.id.register_btn_id).setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
@@ -30,10 +36,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
     private void login(View v) {
         String username = ((EditText) findViewById(R.id.usernameInput)).getText().toString();
         String password = ((EditText) findViewById(R.id.passwordInput)).getText().toString();
-        API.instance.login(
+        API.getInstance().login(
                 username, password,
                 new Callback<String>() {
                     @Override

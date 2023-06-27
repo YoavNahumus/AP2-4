@@ -92,7 +92,7 @@ public class RegisterActivity extends AppCompatActivity {
             Toast.makeText(this, "Please select a profile picture", Toast.LENGTH_SHORT).show();
             return;
         }
-        API.instance.register(
+        API.getInstance().register(
                 username, password, displayName, profilePic,
                 new Callback<>() {
                     @Override

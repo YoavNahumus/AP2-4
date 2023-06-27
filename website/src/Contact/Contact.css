@@ -1,0 +1,49 @@
+.contact .meta {
+    margin: 10px;
+    min-width: 150px;
+    padding-bottom: 10px;
+    display: inline-block;
+    position: relative;
+    width: calc(100% - 90px);
+    height: 55px;
+    border-bottom: 1px solid #eeeeee;
+}
+.contact .meta h3.name {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: inline-block;
+    max-width: 110px;
+    margin-bottom: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.contact .meta p {
+    font-size: 14px;
+    height: calc(100% - 23px);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-bottom: 0;
+    line-height: 150%;
+    color: #747474;
+}
+
+.contact .meta .time {
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 14px;
+    color: #747474;
+}
+
+.contact {
+    min-width: 250px;
+    height: 70px;
+    width: 100%;
+}
+
+.contact:hover {
+    background-color: #4e4e4e;
+}

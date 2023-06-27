@@ -10,6 +10,7 @@ import com.example.ap2_4.entities.Message;
 import com.example.ap2_4.entities.MessageEntity;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -19,7 +20,6 @@ import retrofit2.Response;
 public class ChatRepository {
     private final MessageDao messageDao;
     private final MessageListData messageListData;
-    private final API api = API.instance;
     private final String token;
     private final String chatId;
     private final String username;
@@ -52,7 +52,7 @@ public class ChatRepository {
     }
 
     public void sendMessage(String message) {
-        api.sendMessage(chatId, token, message, new Callback<Message>() {
+        API.getInstance().sendMessage(chatId, token, message, new Callback<Message>() {
             @Override
             public void onResponse(Call<Message> call, Response<Message> response) {
                 if (response.isSuccessful()) {
@@ -69,8 +69,13 @@ public class ChatRepository {
         });
     }
 
+    public void addMessage(String message) {
+        messageDao.insert(new MessageEntity(false, message, new Date()));
+        messageListData.postValue(messageDao.index());
+    }
+
     public void reload() {
-        api.getMessages(chatId, token, new Callback<List<Message>>() {
+        API.getInstance().getMessages(chatId, token, new Callback<List<Message>>() {
             @Override
             public void onResponse(Call<List<Message>> call, Response<List<Message>> response) {
                 if (response.isSuccessful()) {

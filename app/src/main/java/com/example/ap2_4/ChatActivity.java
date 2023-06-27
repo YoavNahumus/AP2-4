@@ -12,7 +12,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.ap2_4.adapters.ChatAdapter;
-import com.example.ap2_4.api.API;
 import com.example.ap2_4.viewmodels.ChatViewModel;
 import com.google.android.material.imageview.ShapeableImageView;
 
