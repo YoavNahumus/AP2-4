@@ -15,12 +15,6 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 public class FireService extends FirebaseMessagingService {
-
-    @Override
-    public void onNewToken(@NonNull String s) {
-        super.onNewToken(s);
-    }
-
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         Log.d("firebase", "MessageRecived");
@@ -38,6 +32,13 @@ public class FireService extends FirebaseMessagingService {
                 return;
             }
             notificationManager.notify(1, builder.build());
+
+            if (remoteMessage.getData().get("my_key") == "newMessage"){
+                Log.d("firebase","newMessage!");
+            }
+            if (remoteMessage.getData().get("my_key") == "newChat"){
+                //
+            }
         }
     }
 
