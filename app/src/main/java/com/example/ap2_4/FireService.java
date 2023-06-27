@@ -35,9 +35,10 @@ public class FireService extends FirebaseMessagingService {
 
             if (remoteMessage.getData().get("my_key") == "newMessage"){
                 Log.d("firebase","newMessage!");
+                //username => title, message => body
             }
             if (remoteMessage.getData().get("my_key") == "newChat"){
-                //
+                //username is the start of body "${username} opened a new chat with you"
             }
         }
     }
