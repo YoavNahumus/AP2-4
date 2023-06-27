@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -94,10 +96,13 @@ public class ChatsActivity extends AppCompatActivity {
 
         chatDao = db.chatDao();
 
-        FloatingActionButton btnAdd = findViewById(R.id.btnAdd);
-        btnAdd.setOnClickListener(v -> {
-            Intent intent = new Intent(this, AddChatActivity.class).putExtra("token", getIntent().getStringExtra("token"));
-            startActivity(intent);
+        ImageView btnAdd = findViewById(R.id.btnAdd);
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ChatsActivity.this, AddChatActivity.class).putExtra("token", getIntent().getStringExtra("token"));
+                startActivity(intent);
+            }
         });
 
         viewModel = new ViewModelProvider(this).get(ChatsViewModel.class);

@@ -63,17 +63,15 @@
                     android:id="@+id/lstChats"/>
             </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
+            <ImageView
                 android:id="@+id/btnAdd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:layout_marginEnd="16dp"
-                android:clickable="true"
-
+                android:src="@drawable/baseline_person_add_alt_1_24"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:srcCompat="@android:drawable/ic_menu_add" />
+                app:layout_constraintEnd_toEndOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
