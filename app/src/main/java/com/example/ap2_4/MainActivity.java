@@ -24,6 +24,10 @@ public class MainActivity extends AppCompatActivity {
 
 
         findViewById(R.id.login_btn_id).setOnClickListener(this::login);
+        findViewById(R.id.register_btn_id).setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void login(View v) {

@@ -17,28 +17,24 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.ap2_4.api.API;
+
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity {
 
     String profilePic;
     ImageView imageInput;
 
-    private String encodeImage(Bitmap bm)
-    {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bm.compress(Bitmap.CompressFormat.JPEG,100,baos);
-        byte[] b = baos.toByteArray();
-
-        String encImage = Base64.encodeToString(b, Base64.DEFAULT);
-
-        //data:[<media type>][;charset=<character set>][;base64],<data>
-        String formatedImage = "data:image/jpeg;base64,"+encImage;
-
-        return formatedImage;
+    private String encodeImage(Bitmap bm) {
+        return "data:image/jpeg;base64," + Converters.fromBitmap(bm);
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,35 +75,47 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void register(View v) {
-        try {
-            URL url = new URL("http://localhost:5000/Users");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/json; utf-8");
-            conn.setRequestProperty("Accept", "application/json");
-            conn.setDoOutput(true);
-            String jsonInputString = String.format(
-                    "{" +
-                            "\"username\": \"%s\"," +
-                            "\"password\": \"%s\"," +
-                            "\"profilePic\": \"%s\"," +
-                            "\"displayName\": \"%s\"" +
-                            "}", ((EditText) findViewById(R.id.username)).getText(),
-                    ((EditText) findViewById(R.id.password)).getText(),
-                    profilePic,
-                    ((EditText) findViewById(R.id.display_name)).getText());
-
-            conn.getOutputStream().write(jsonInputString.getBytes());
-            if (conn.getResponseCode() == 200) {
-                Intent myIntent = new Intent(RegisterActivity.this, MainActivity.class);
-                RegisterActivity.this.startActivity(myIntent);
-            } else if (conn.getResponseCode() == 409) {
-                Toast.makeText(getApplicationContext(), "Username already exists", Toast.LENGTH_LONG).show();
-            } else {
-                Toast.makeText(getApplicationContext(), "Error: " + conn.getResponseCode(), Toast.LENGTH_LONG).show();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        String username = ((EditText) findViewById(R.id.username)).getText().toString();
+        String password = ((EditText) findViewById(R.id.password)).getText().toString();
+        String confirmPassword = ((EditText) findViewById(R.id.confirm_password)).getText().toString();
+        String displayName = ((EditText) findViewById(R.id.display_name)).getText().toString();
+        String profilePic = this.profilePic;
+        if (!password.equals(confirmPassword)) {
+            Toast.makeText(this, "Passwords don't match", Toast.LENGTH_SHORT).show();
+            return;
         }
+        if (username.isEmpty() || password.isEmpty() || displayName.isEmpty()) {
+            Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (profilePic == null) {
+            Toast.makeText(this, "Please select a profile picture", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        API.instance.register(
+                username, password, displayName, profilePic,
+                new Callback<>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        if (!response.isSuccessful()) {
+                            if (response.code() == 409) {
+                                Toast.makeText(RegisterActivity.this, "Username already exists", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                            Toast.makeText(RegisterActivity.this, "Failed to register", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        String token = response.body();
+                        Intent intent = new Intent(RegisterActivity.this, ChatsActivity.class);
+                        intent.putExtra("token", token);
+                        intent.putExtra("username", username);
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+                        Toast.makeText(RegisterActivity.this, "Failed to register", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 }
