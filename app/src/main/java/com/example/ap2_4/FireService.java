@@ -29,7 +29,7 @@ public class FireService extends FirebaseMessagingService {
             createNotificationChannel();
 
             NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "1")
-                    .setSmallIcon(R.drawable.baseline_add_a_photo_24)
+                    .setSmallIcon(R.drawable.baseline_mark_unread_chat_alt_24)
                     .setContentTitle(remoteMessage.getNotification().getTitle())
                     .setContentText(remoteMessage.getNotification().getBody())
                     .setPriority(NotificationCompat.PRIORITY_DEFAULT);
