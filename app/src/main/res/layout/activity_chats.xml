@@ -6,26 +6,74 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ChatsActivity"
-    android:background="#090b0a">
-
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:layout_height="match_parent"
+    android:background="@color/graybg">
+    <LinearLayout
         android:layout_width="match_parent"
-        android:id="@+id/refreshLayout">
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/lstChats"/>
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnAdd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="16dp"
-        android:clickable="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_add" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:orientation="horizontal"
+            android:background="@color/greentop">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/baseline_arrow_back_24"
+                android:id="@+id/btnBack"/>
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/profilePicture"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:contentDescription="Profile Picture"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="5dp"
+                android:scaleType="centerCrop"
+                android:padding="5dp"
+                app:shapeAppearanceOverlay="@style/circleImageView"
+                app:strokeColor="@android:color/darker_gray"
+                app:strokeWidth="2dp" />
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:scrollHorizontally="true"
+                android:text=""
+                android:layout_marginHorizontal="15dp"
+                android:ellipsize="end"
+                android:textStyle="bold"
+                android:textColor="@color/white2"
+                android:textSize="30sp"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:id="@+id/displayName"/>
+        </LinearLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent">
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:id="@+id/refreshLayout">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/lstChats"/>
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+            <ImageView
+                android:id="@+id/btnAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/baseline_person_add_alt_1_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

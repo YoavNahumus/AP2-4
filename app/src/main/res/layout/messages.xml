@@ -9,11 +9,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/message"
-        android:minWidth="80dp"
+        android:minWidth="100dp"
         android:paddingVertical="10dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
         android:layout_marginTop="10dp"
+        android:textSize="30sp"
         android:textColor="@color/white2"/>
 
 </LinearLayout>

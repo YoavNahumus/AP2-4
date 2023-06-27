@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:background="#090b0a"
+        android:background="@color/graybg"
         android:orientation="vertical"
         android:gravity="center"
         app:layout_constraintTop_toTopOf="parent"
@@ -20,6 +20,7 @@
             android:layout_height="wrap_content"
             android:autofillHints="username"
             android:hint="Username"
+            android:textColor="@color/white2"
             android:inputType="text"
             android:textAlignment="center"
             android:textSize="25sp" />
@@ -29,16 +30,18 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Add Chat"
+            android:backgroundTint="@color/dark_green_title"
             android:textSize="25sp"
+            android:textColor="@color/white2"
             android:id="@+id/btnAddChat"/>
 
     </LinearLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:id="@+id/btnBack"
-        app:srcCompat="@android:drawable/ic_menu_close_clear_cancel"/>
+        app:srcCompat="@drawable/baseline_arrow_back_24"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

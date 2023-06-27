@@ -19,8 +19,10 @@ public class API {
     private static API instance = new API("http://10.0.2.2:5000/api/");
     Retrofit retrofit;
     WebServiceAPI webServiceAPI;
+    private String url;
 
     private API(String url) {
+        this.url = url;
         retrofit = new Retrofit.Builder()
                 .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -34,6 +36,10 @@ public class API {
 
     public static void changeURL(String url) {
         instance = new API(url);
+    }
+
+    public static String getURL() {
+        return instance.url;
     }
 
     public void login(String username, String password, Callback<String> callback) {

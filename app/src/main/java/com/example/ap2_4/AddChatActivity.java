@@ -3,6 +3,7 @@ package com.example.ap2_4;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -47,7 +48,7 @@ public class AddChatActivity extends AppCompatActivity {
               });
         });
 
-        FloatingActionButton btnBack = findViewById(R.id.btnBack);
+        ImageView btnBack = findViewById(R.id.btnBack);
         btnBack.setOnClickListener(v -> finish());
     }
 }

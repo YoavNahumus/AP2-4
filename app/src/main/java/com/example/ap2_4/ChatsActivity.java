@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,9 +19,11 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.example.ap2_4.adapters.ChatsListAdapter;
 import com.example.ap2_4.api.API;
 import com.example.ap2_4.entities.FireToken;
+import com.example.ap2_4.entities.User;
 import com.example.ap2_4.viewmodels.ChatsViewModel;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.imageview.ShapeableImageView;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 
@@ -94,10 +99,13 @@ public class ChatsActivity extends AppCompatActivity {
 
         chatDao = db.chatDao();
 
-        FloatingActionButton btnAdd = findViewById(R.id.btnAdd);
-        btnAdd.setOnClickListener(v -> {
-            Intent intent = new Intent(this, AddChatActivity.class).putExtra("token", getIntent().getStringExtra("token"));
-            startActivity(intent);
+        ImageView btnAdd = findViewById(R.id.btnAdd);
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ChatsActivity.this, AddChatActivity.class).putExtra("token", getIntent().getStringExtra("token"));
+                startActivity(intent);
+            }
         });
 
         viewModel = new ViewModelProvider(this).get(ChatsViewModel.class);
@@ -110,5 +118,24 @@ public class ChatsActivity extends AppCompatActivity {
             viewModel.reload();
             refreshLayout.setRefreshing(false);
         });
+
+        API.getInstance().getUser(getIntent().getStringExtra("username"), getIntent().getStringExtra("token"), new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful()) {
+                    ShapeableImageView profilePic = findViewById(R.id.profilePicture);
+                    profilePic.setImageBitmap(Converters.toBitmap(response.body().image));
+                    TextView displayName = findViewById(R.id.displayName);
+                    displayName.setText(response.body().displayName);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+
+            }
+        });
+
+        findViewById(R.id.btnBack).setOnClickListener(v -> finish());
     }
 }

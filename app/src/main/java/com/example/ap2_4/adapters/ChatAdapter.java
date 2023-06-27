@@ -54,6 +54,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
                 holder.message.setBackgroundResource(R.drawable.message_bg_left);
             }
             holder.message.setLayoutParams(params);
+            holder.message.setPadding(20,20,20,20);
             holder.message.setText(current.message);
         }
     }
