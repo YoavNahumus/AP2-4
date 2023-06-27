@@ -1,0 +1,70 @@
+#send-button{
+    width: 50px;
+    height: 50px;
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    padding:0;
+    float: right;
+}
+
+#self-name {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 25px;
+    display: inline-block;
+    width : 100px;
+    max-width: 50px;
+    margin-top: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.toolbar{
+    background-color: #747474;
+    height: 70px;
+}
+
+#input-text{
+    position: absolute;
+    left: 10px;
+    width: calc(100% - 65px);
+    bottom: 7px;
+}
+
+#chat-toolbar{
+    position: relative;
+    height: 50px;
+}
+
+#selected-contact{
+    position: relative;
+    top:20px;
+    left: 10px;
+    width: calc(50vw - 80px);
+    height: calc(100% - 20px);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-weight: bold;
+}
+
+#top-left-toolbar{
+    overflow: hidden;
+    white-space: nowrap;
+    width: 25vw;
+    overflow-x: auto;
+}
+
+#contact-button{
+    width: 50px;
+    height: 50px;
+    margin-top: 10px;
+    margin-left: 5px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    padding:0;
+    float: right;
+}

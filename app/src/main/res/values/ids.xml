@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="login_btn_id" type="id" />
+    <item name="register_btn_id" type="id" />
+    <item name="image_input_id" type="id" />
+</resources>
