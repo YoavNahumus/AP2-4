@@ -87,7 +87,7 @@ const createMessage = async (req, res) => {
     const users = await Chat.getUsers(chatId);
     console.log(users);
     users.filter((u) => u !== user).forEach((u) => Socket.sendMessage(u, user));
-    users.filter((u) => u !== user).forEach((u) => FireModule.sendMessage(u, user, message));
+    users.filter((u) => u !== user).forEach((u) => FireModule.sendMessage(u, user, message, chatId));
     res.status(200).json(msg);
 };
 

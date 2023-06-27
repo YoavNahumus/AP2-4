@@ -16,6 +16,11 @@ import com.example.ap2_4.viewmodels.ChatsViewModel;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.Console;
+
 public class FireService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
@@ -35,13 +40,30 @@ public class FireService extends FirebaseMessagingService {
             }
             notificationManager.notify(1, builder.build());
 
-            if (remoteMessage.getData().get("my_key").equals("newMessage")) {
-                Log.d("firebase","newMessage!");
-                ChatViewModel.add(remoteMessage.getData().get("title"), remoteMessage.getData().get("body"));
+            JSONObject dat = null;
+            try {
+                dat = new JSONObject(remoteMessage.getData().get("my_key"));
+                Log.d("JSON",dat.toString());
+                Log.d("JSON",dat.get("type").toString());
+                Log.d("JSON",dat.get("dat").toString()); //CHAT ID IS HERE
+                //
+
+                if (dat.get("type").toString().equals("newMessage")) {
+                    Log.d("firebase","newMessage!");
+                    ChatViewModel.add(remoteMessage.getNotification().getTitle(), remoteMessage.getNotification().getBody());
+                }
+                if (dat.get("type").toString().equals("newChat")) {
+                    ChatsViewModel.reloadIfPresent();
+                }
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+                return;
             }
-            if (remoteMessage.getData().get("my_key").equals("newChat")) {
-                ChatsViewModel.reloadIfPresent();
-            }
+            //
+
+
         }
     }
 

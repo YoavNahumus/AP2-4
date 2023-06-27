@@ -4,7 +4,7 @@ const FirebaseTokens = {};
 
 const request = require('request');
 
-sendPushNotification = (fcm_token, title, body, notificationType) => {
+sendPushNotification = (fcm_token, title, body, notificationType,moredat) => {
     var message = { 
         to: fcm_token, 
     
@@ -15,7 +15,10 @@ sendPushNotification = (fcm_token, title, body, notificationType) => {
         },
         
         data: {  //you can send only notification or only data(or include both)
-            my_key: notificationType,
+            my_key: {
+                type: notificationType,
+                dat : moredat
+            },
         }
     }
     
@@ -52,11 +55,11 @@ const updateFireToken = async (req, res) => {
     res.status(200);
 }
 
-const sendMessage = (to, from, content) => {
+const sendMessage = (to, from, content,id) => {
     console.log("sending msg firebase", to, from);
     console.log(FirebaseTokens);
     if (FirebaseTokens[to]) {
-        sendPushNotification(FirebaseTokens[to], "Chatapp",from + " : " + content, "newMessage");
+        sendPushNotification(FirebaseTokens[to], "Chatapp",from + " : " + content, "newMessage", id);
     }
 }
 
@@ -64,9 +67,9 @@ const updateChats = (user, user2) => {
     if (FirebaseTokens[user]) {
         if (user2) {
             console.log(user2);
-            sendPushNotification(FirebaseTokens[user], "Chatapp", user2 + " Opened A New Chat With You!", "newChat");
+            sendPushNotification(FirebaseTokens[user], "Chatapp", user2 + " Opened A New Chat With You!", "newChat","bla");
         } else {
-            sendPushNotification(FirebaseTokens[user], "Chatapp", "Your chat list got updated!", "newChat");
+            sendPushNotification(FirebaseTokens[user], "Chatapp", "Your chat list got updated!", "newChat", "bla");
         }
     }
 }
