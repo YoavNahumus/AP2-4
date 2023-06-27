@@ -10,14 +10,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/graybg"
-        android:gravity="bottom">
+        android:background="@color/graybg">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/greentop"
-            android:layout_weight="0">
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:orientation="horizontal"
+            android:background="@color/greentop">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -25,64 +25,79 @@
                 android:src="@drawable/baseline_arrow_back_24"
                 android:id="@+id/btnBack"/>
             <com.google.android.material.imageview.ShapeableImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:id="@+id/profilePicture"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:contentDescription="Profile Picture"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="5dp"
+                android:scaleType="centerCrop"
                 android:padding="5dp"
-                app:strokeWidth="5dp"
-                app:strokeColor="@android:color/darker_gray"
                 app:shapeAppearanceOverlay="@style/circleImageView"
-                android:id="@+id/profilePicture"/>
+                app:strokeColor="@android:color/darker_gray"
+                app:strokeWidth="2dp" />
             <TextView
-                android:layout_width="200dp"
+                android:layout_width="fill_parent"
                 android:layout_height="match_parent"
                 android:scrollHorizontally="true"
                 android:text=""
+                android:layout_marginHorizontal="15dp"
                 android:ellipsize="end"
                 android:textStyle="bold"
                 android:textColor="@color/white2"
-                android:textSize="18dp"
+                android:textSize="30sp"
                 android:gravity="center_vertical"
                 android:maxLines="1"
                 android:id="@+id/displayName"/>
         </LinearLayout>
+        
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1">
 
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:layout_width="wrap_content"
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/refreshLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                 android:id="@+id/lstMsgs"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content" />
+             </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/refreshLayout">
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_weight="9"
                 android:layout_height="wrap_content"
-                android:id="@+id/lstMsgs"/>
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+                android:id="@+id/msgInput">
 
+            </EditText>
 
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:src="@drawable/baseline_send_50"
+                android:layout_weight="1"
+                android:id="@+id/btnSend">
+
+            </ImageView>
+        </LinearLayout>
 
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:weightSum="10">
 
-        <EditText
-            android:layout_width="0dp"
-            android:layout_weight="9"
-            android:layout_height="wrap_content"
-            android:id="@+id/msgInput">
-
-        </EditText>
-
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginHorizontal="10dp"
-            android:src="@drawable/baseline_send_50"
-            android:layout_weight="1"
-            android:id="@+id/btnSend">
-
-        </ImageView>
-    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
