@@ -45,12 +45,13 @@ public class FireService extends FirebaseMessagingService {
                 dat = new JSONObject(remoteMessage.getData().get("my_key"));
                 Log.d("JSON",dat.toString());
                 Log.d("JSON",dat.get("type").toString());
-                Log.d("JSON",dat.get("dat").toString()); //CHAT ID IS HERE
+                String chatId = dat.get("dat").toString();
+                Log.d("JSON",chatId); //CHAT ID IS HERE
                 //
 
                 if (dat.get("type").toString().equals("newMessage")) {
                     Log.d("firebase","newMessage!");
-                    ChatViewModel.add(remoteMessage.getNotification().getTitle(), remoteMessage.getNotification().getBody());
+                    ChatViewModel.add(chatId, remoteMessage.getNotification().getBody());
                 }
                 if (dat.get("type").toString().equals("newChat")) {
                     ChatsViewModel.reloadIfPresent();

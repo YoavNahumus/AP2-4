@@ -13,19 +13,19 @@ public class ChatViewModel extends ViewModel {
     private LiveData<List<MessageEntity>> messages;
     private static ChatViewModel instance;
 
-    private String username;
+    private String chatId;
 
     public ChatViewModel() {
     }
 
-    public static void add(String username, String message) {
-        if (instance != null && username.equals(instance.username)) {
+    public static void add(String chatId, String message) {
+        if (instance != null && chatId.equals(instance.chatId)) {
             instance.addMessage(message);
         }
     }
 
     public void init(String chatId, String token, String username) {
-        this.username = username;
+        this.chatId = chatId;
         repository = new ChatRepository(chatId, token, username);
         messages = repository.getMessages();
         instance = this;
