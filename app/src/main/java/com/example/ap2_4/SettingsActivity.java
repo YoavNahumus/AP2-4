@@ -26,8 +26,6 @@ public class SettingsActivity extends AppCompatActivity {
         });
 
 
-
-
         ImageView btnBack = findViewById(R.id.btnBack);
         btnBack.setOnClickListener(v -> finish());
     }
