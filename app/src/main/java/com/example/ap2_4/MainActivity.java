@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private void login(View v) {
         String username = ((EditText) findViewById(R.id.usernameInput)).getText().toString();
         String password = ((EditText) findViewById(R.id.passwordInput)).getText().toString();
-        API.instance.login(
+        API.getInstance().login(
                 username, password,
                 new Callback<String>() {
                     @Override

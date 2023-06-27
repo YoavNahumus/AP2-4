@@ -21,7 +21,6 @@ import retrofit2.Response;
 public class ChatsRepository {
     private final ChatDao chatDao;
     private final ChatListData chatListData;
-    private final API api = API.instance;
     private final String token;
 
     public ChatsRepository(String token) {
@@ -50,7 +49,7 @@ public class ChatsRepository {
     }
 
     public void addChat(ChatEntity chat) {
-        api.createChat(chat.username, token, new Callback<ChatDescription>() {
+        API.getInstance().createChat(chat.username, token, new Callback<ChatDescription>() {
             @Override
             public void onResponse(Call<ChatDescription> call, Response<ChatDescription> response) {
                 if (response.isSuccessful()) {
@@ -68,7 +67,7 @@ public class ChatsRepository {
     }
 
     public void reload() {
-        api.getChats(token, new Callback<List<SimplifiedChat>>() {
+        API.getInstance().getChats(token, new Callback<List<SimplifiedChat>>() {
             @Override
             public void onResponse(Call<List<SimplifiedChat>> call, Response<List<SimplifiedChat>> response) {
                 if (response.isSuccessful()) {

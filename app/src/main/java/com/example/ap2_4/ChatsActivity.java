@@ -48,7 +48,7 @@ public class ChatsActivity extends AppCompatActivity {
                 firebaseToken = instanceIdResult.getToken();
                 Log.d("firebase",firebaseToken);
 
-                API.instance.updateFireToken(
+                API.getInstance().updateFireToken(
                         firebaseToken,
                         Token,
                         new Callback<String>() {
