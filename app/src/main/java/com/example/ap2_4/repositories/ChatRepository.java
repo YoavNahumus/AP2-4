@@ -10,6 +10,7 @@ import com.example.ap2_4.entities.Message;
 import com.example.ap2_4.entities.MessageEntity;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -67,6 +68,11 @@ public class ChatRepository {
 
             }
         });
+    }
+
+    public void addMessage(String message) {
+        messageDao.insert(new MessageEntity(false, message, new Date()));
+        messageListData.postValue(messageDao.index());
     }
 
     public void reload() {

@@ -22,7 +22,7 @@ public class API {
 
     private API() {
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.0.29:5000/api/")
+                .baseUrl("http://10.0.2.2:5000/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         webServiceAPI = retrofit.create(WebServiceAPI.class);

@@ -11,6 +11,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import com.example.ap2_4.viewmodels.ChatViewModel;
+import com.example.ap2_4.viewmodels.ChatsViewModel;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -33,12 +35,12 @@ public class FireService extends FirebaseMessagingService {
             }
             notificationManager.notify(1, builder.build());
 
-            if (remoteMessage.getData().get("my_key") == "newMessage"){
+            if (remoteMessage.getData().get("my_key").equals("newMessage")) {
                 Log.d("firebase","newMessage!");
-                //username => title, message => body
+                ChatViewModel.add(remoteMessage.getData().get("title"), remoteMessage.getData().get("body"));
             }
-            if (remoteMessage.getData().get("my_key") == "newChat"){
-                //username is the start of body "${username} opened a new chat with you"
+            if (remoteMessage.getData().get("my_key").equals("newChat")) {
+                ChatsViewModel.reloadIfPresent();
             }
         }
     }
