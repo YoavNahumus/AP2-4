@@ -16,6 +16,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/profilePicture"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:contentDescription="Profile Picture"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="10dp"
+            android:scaleType="centerCrop"
+            android:padding="5dp"
+            app:shapeAppearanceOverlay="@style/circleImageView"
+            app:strokeColor="@android:color/darker_gray"
+            app:strokeWidth="2dp" />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -43,20 +56,6 @@
                 android:layout_marginBottom="10dp"
                 android:textSize="15sp" />
         </LinearLayout>
-
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/profilePicture"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:contentDescription="Profile Picture"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginVertical="10dp"
-            android:scaleType="centerCrop"
-            android:padding="5dp"
-            app:shapeAppearanceOverlay="@style/circleImageView"
-            app:strokeColor="@android:color/darker_gray"
-            app:strokeWidth="2dp" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
